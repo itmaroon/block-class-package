@@ -21,6 +21,6 @@
         }
     ],
     "require": {
-        "itmar/blockclasspakage": "dev-master"
+        "itmar/block-class-pakage": "dev-master"
     }
 }
