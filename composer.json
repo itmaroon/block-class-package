@@ -20,6 +20,7 @@
             "url": "https://github.com/itmaroon/block-class-package"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "itmar/block-class-pakage": "dev-master"
     }
