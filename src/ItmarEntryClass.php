@@ -42,12 +42,11 @@ class ItmarEntryClass
   }
 
   // 依存関係のチェック関数
-
   function check_dependencies($text_domain, $pluin_slug)
   {
     include_once(ABSPATH . 'wp-admin/includes/plugin.php'); //is_plugin_active() 関数の使用
 
-    $required_plugins = [$pluin_slug]; // 依存するプラグインのスラッグ
+    $required_plugins = $pluin_slug; // 依存するプラグインのスラッグ
     $ret_obj = null; //インストールされているかの通知オブジェクト
 
     foreach ($required_plugins as $plugin) {
@@ -71,5 +70,31 @@ class ItmarEntryClass
       }
     }
     return $ret_obj;
+  }
+
+  //チェックしたプラグインが有効化されているかを判断する関数
+  function activation_check($text_domain, $pluin_slug)
+  {
+    $notice = $this->check_dependencies($text_domain, $pluin_slug);
+
+    if (!is_null($notice)) {
+      // エラーメッセージ
+      $message = $notice["message"] . $notice["link"];
+      // プラグインへの戻るリンク
+      $return_link = '<br><br><a href="' . esc_url(admin_url('plugins.php')) . '">' . __("Return to Plugins Setting", "form-send-blocks") . '</a>';
+
+      // wp_die関数でカスタムメッセージとリンクを表示
+      wp_die($message . $return_link);
+    }
+  }
+
+  //管理画面に通知を表示する関数
+  function show_admin_dependency_notices($text_domain, $pluin_slug)
+  {
+    $notice = $this->check_dependencies($text_domain, $pluin_slug);
+    if (!is_null($notice)) {
+      echo '<div class="error"><p>' . esc_html($notice["message"]);
+      echo '<a href="' . esc_url($notice["url"]) . '">' . esc_html($notice["link"]) . '</a></p></div>';
+    }
   }
 }
