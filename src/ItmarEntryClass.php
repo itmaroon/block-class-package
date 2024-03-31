@@ -42,7 +42,7 @@ class ItmarEntryClass
   }
 
   // 依存関係のチェック関数
-  function check_dependencies($text_domain, $pluin_slug)
+  function check_dependencies($plugin_data, $pluin_slug)
   {
     include_once(ABSPATH . 'wp-admin/includes/plugin.php'); //is_plugin_active() 関数の使用
 
@@ -56,14 +56,14 @@ class ItmarEntryClass
           // プラグインはインストールされているが有効化されていない
           $plugin_file = $plugin . '/' . $plugin . '.php';
           $activate_url = wp_nonce_url(admin_url('plugins.php?action=activate&plugin=' . $plugin_file), 'activate-plugin_' . $plugin_file);
-          $link = __("Activate Plugin", $text_domain);
-          $message = 'Form Send Blocks:' . __("Required plugin is not active.", $text_domain);
+          $link = __("Activate Plugin", $plugin_data['TextDomain']);
+          $message = $plugin_data['Name'] . ': ' . __("Required plugin is not active.", $plugin_data['TextDomain']);
           $ret_obj = array("message" => $message, "link" => $link, "url" => $activate_url);
         } else {
           // プラグインがインストールされていない
           $install_url = admin_url('plugin-install.php?s=' . $plugin . '&tab=search&type=term');
-          $link = __("Install Plugin", $text_domain);
-          $message = 'Form Send Blocks:' . __("Required plugin is not installed.", $text_domain);
+          $link = __("Install Plugin", $plugin_data['TextDomain']);
+          $message = $plugin_data['Name'] . ': ' . __("Required plugin is not installed.", $plugin_data['TextDomain']);
           $ret_obj = array("message" => $message, "link" => $link, "url" => $install_url);
         }
         return $ret_obj;
@@ -73,15 +73,15 @@ class ItmarEntryClass
   }
 
   //チェックしたプラグインが有効化されているかを判断する関数
-  function activation_check($text_domain, $pluin_slug)
+  function activation_check($plugin_data, $pluin_slug)
   {
-    $notice = $this->check_dependencies($text_domain, $pluin_slug);
+    $notice = $this->check_dependencies($plugin_data, $pluin_slug);
 
     if (!is_null($notice)) {
       // エラーメッセージ
       $message = $notice["message"] . $notice["link"];
       // プラグインへの戻るリンク
-      $return_link = '<br><br><a href="' . esc_url(admin_url('plugins.php')) . '">' . __("Return to Plugins Setting", "form-send-blocks") . '</a>';
+      $return_link = '<br><br><a href="' . esc_url(admin_url('plugins.php')) . '">' . __("Return to Plugins Setting", $plugin_data['TextDomain']) . '</a>';
 
       // wp_die関数でカスタムメッセージとリンクを表示
       wp_die($message . $return_link);
@@ -89,9 +89,9 @@ class ItmarEntryClass
   }
 
   //管理画面に通知を表示する関数
-  function show_admin_dependency_notices($text_domain, $pluin_slug)
+  function show_admin_dependency_notices($plugin_data, $pluin_slug)
   {
-    $notice = $this->check_dependencies($text_domain, $pluin_slug);
+    $notice = $this->check_dependencies($plugin_data, $pluin_slug);
     if (!is_null($notice)) {
       echo '<div class="error"><p>' . esc_html($notice["message"]);
       echo '<a href="' . esc_url($notice["url"]) . '">' . esc_html($notice["link"]) . '</a></p></div>';
