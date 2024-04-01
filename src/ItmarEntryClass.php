@@ -42,11 +42,11 @@ class ItmarEntryClass
   }
 
   // 依存関係のチェック関数
-  function check_dependencies($plugin_data, $pluin_slug)
+  function check_dependencies($plugin_data, $plugin_slug)
   {
     include_once(ABSPATH . 'wp-admin/includes/plugin.php'); //is_plugin_active() 関数の使用
 
-    $required_plugins = $pluin_slug; // 依存するプラグインのスラッグ
+    $required_plugins = $plugin_slug; // 依存するプラグインのスラッグ
     $ret_obj = null; //インストールされているかの通知オブジェクト
 
     foreach ($required_plugins as $plugin) {
@@ -73,9 +73,9 @@ class ItmarEntryClass
   }
 
   //チェックしたプラグインが有効化されているかを判断する関数
-  function activation_check($plugin_data, $pluin_slug)
+  function activation_check($plugin_data, $plugin_slug)
   {
-    $notice = $this->check_dependencies($plugin_data, $pluin_slug);
+    $notice = $this->check_dependencies($plugin_data, $plugin_slug);
 
     if (!is_null($notice)) {
       // エラーメッセージ
