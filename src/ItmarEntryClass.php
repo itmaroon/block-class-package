@@ -7,8 +7,9 @@ class ItmarEntryClass
   function block_init($text_domain, $file_path)
   {
     //jsで使えるようにhome_urlをローカライズ
+    $js_name = str_replace("-", "_", $text_domain);
     wp_enqueue_script('itmar-script-handle', plugins_url('', $file_path) . '/assets/block_handle.js', null, null, false);
-    wp_localize_script('itmar-script-handle', 'localize', array(
+    wp_localize_script('itmar-script-handle', $js_name, array(
       'home_url' => home_url(),
       'plugin_url' => plugins_url('', $file_path)
     ));
