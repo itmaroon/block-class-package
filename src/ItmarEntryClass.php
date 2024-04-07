@@ -6,6 +6,13 @@ class ItmarEntryClass
 {
   function block_init($text_domain, $file_path)
   {
+    //jsで使えるようにhome_urlをローカライズ
+    wp_enqueue_script('itmar-script-handle', plugins_url('', $file_path) . '/assets/block_handle.js', null, null, false);
+    wp_localize_script('itmar-script-handle', 'localize', array(
+      'home_url' => home_url(),
+      'plugin_url' => plugins_url('', $file_path)
+    ));
+
     //ブロックの登録
     foreach (glob(plugin_dir_path($file_path) . 'build/blocks/*') as $block) {
       $block_name = basename($block);
@@ -26,16 +33,10 @@ class ItmarEntryClass
           'editor_script' => $script_handle
         )
       );
-
       // その後、このハンドルを使用してスクリプトの翻訳をセット
       wp_set_script_translations($script_handle, $text_domain, plugin_dir_path($file_path) . 'languages');
-      //jsで使えるようにhome_urlをローカライズ
-      $js_name = str_replace("-", "_", $text_domain);
-      wp_localize_script($script_handle, $js_name, array(
-        'home_url' => home_url(),
-        'plugin_url' => plugins_url('', $file_path)
-      ));
     }
+
 
     //PHP用のテキストドメインの読込（国際化）
     load_plugin_textdomain($text_domain, false, basename(dirname($file_path)) . '/languages');
