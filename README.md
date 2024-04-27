@@ -11,7 +11,7 @@ composer require itmar/block-class-package
 namespace Itmar\BlockClassPakage;  
 class ItmarEntryClass
 
-##　メソッドの機能と引数
+## メソッドの機能と引数
 ### block_init(string $text_domain, string $file_path)
 #### 説明
 $file_path内に含まれている複数のブロックを登録します。同時にPHPとJavascriptの翻訳関数をセットします。翻訳のためのpot,po,moの各ファイルはプラグインのルートフォルダ内のlanguagesフォルダになります。
@@ -22,7 +22,7 @@ plugin_url・・・プラグインルートのURL
 #### 引数
 - `$text_domain` string 必須  
 プラグインで設定したテキストドメイン名
-- $file_path string 必須  
+- `$file_path` string 必須  
 プラグインのルートフォルダへの絶対パス。通常は__FILE__を設定する。
 #### 戻り値
 なし
