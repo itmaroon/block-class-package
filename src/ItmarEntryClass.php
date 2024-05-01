@@ -15,9 +15,25 @@ class ItmarEntryClass
     ));
 
     //ブロックの登録
-    foreach (glob(plugin_dir_path($file_path) . 'build/blocks/*') as $block) {
+    $blocks_dir = plugin_dir_path($file_path) . 'build/blocks';
+    if (is_dir($blocks_dir)) {
+      // blocksフォルダが存在する場合、複数のブロックを登録
+      foreach (glob($blocks_dir . '/*') as $block) {
+        // ブロックの登録
+        $block_type = register_block_type($block);
+        // その後、このハンドルを使用してスクリプトの翻訳をセット
+        if ($block_type instanceof \WP_Block_Type) {
+          $block_handle = str_replace("/", "-", $block_type->name);
+          // register_block_typeで生成されるハンドルを使用してスクリプトの翻訳をセット
+          wp_set_script_translations($block_handle . '-editor-script', $text_domain, plugin_dir_path($file_path) . 'languages');
+        }
+      }
+    } else {
+      // blocksフォルダが存在しない場合、単一のブロックを登録
+      $block = plugin_dir_path($file_path) . 'build';
       // ブロックの登録
       $block_type = register_block_type($block);
+
       // その後、このハンドルを使用してスクリプトの翻訳をセット
       if ($block_type instanceof \WP_Block_Type) {
         $block_handle = str_replace("/", "-", $block_type->name);
@@ -25,6 +41,7 @@ class ItmarEntryClass
         wp_set_script_translations($block_handle . '-editor-script', $text_domain, plugin_dir_path($file_path) . 'languages');
       }
     }
+
 
 
     //PHP用のテキストドメインの読込（国際化）
@@ -47,13 +64,13 @@ class ItmarEntryClass
           $plugin_file = $plugin . '/' . $plugin . '.php';
           $activate_url = wp_nonce_url(admin_url('plugins.php?action=activate&plugin=' . $plugin_file), 'activate-plugin_' . $plugin_file);
           $link = __("Activate Plugin", $plugin_data['TextDomain']);
-          $message = $plugin_data['Name'] . ': ' . __("Required plugin is not active.", $plugin_data['TextDomain']);
+          $message = $plugin_data['Name'] . ': ' . __("Required plugin is not active.", $plugin_data['TextDomain']) . "(" . $plugin . ")";
           $ret_obj = array("message" => $message, "link" => $link, "url" => $activate_url);
         } else {
           // プラグインがインストールされていない
           $install_url = admin_url('plugin-install.php?s=' . $plugin . '&tab=search&type=term');
           $link = __("Install Plugin", $plugin_data['TextDomain']);
-          $message = $plugin_data['Name'] . ': ' . __("Required plugin is not installed.", $plugin_data['TextDomain']);
+          $message = $plugin_data['Name'] . ': ' . __("Required plugin is not installed.", $plugin_data['TextDomain']) . "(" . $plugin . ")";
           $ret_obj = array("message" => $message, "link" => $link, "url" => $install_url);
         }
         return $ret_obj;
