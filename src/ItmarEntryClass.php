@@ -104,4 +104,44 @@ class ItmarEntryClass
       echo '<a href="' . esc_url($notice["url"]) . '">' . esc_html($notice["link"]) . '</a></p></div>';
     }
   }
+
+  //共通スタイルの読み込み
+  function enqueueCommonStyles($filePath, $isEditor, $packageName)
+  {
+    $packageJsonPath = plugin_dir_path($filePath) . 'package.json';
+
+    if (file_exists($packageJsonPath)) {
+      $packageJson = json_decode(file_get_contents($packageJsonPath), true);
+
+      if (isset($packageJson['dependencies'][$packageName])) {
+        $packageVersion = $packageJson['dependencies'][$packageName];
+        $styleFiles = [];
+
+        if ($isEditor) {
+          $styleFiles = [
+            'index.css' => 'itmar-block-packages-editor-style',
+            'style-index.css' => 'itmar-block-packages-style',
+          ];
+        } else {
+          $styleFiles = [
+            'style-index.css' => 'itmar-block-packages-style',
+          ];
+        }
+
+        foreach ($styleFiles as $file => $handle) {
+          $stylePath = plugin_dir_path($filePath) . 'node_modules/' . $packageName . '/build/' . $file;
+
+          if (file_exists($stylePath)) {
+            wp_register_style(
+              $handle,
+              plugins_url('node_modules/' . $packageName . '/build/' . $file, $filePath),
+              [],
+              $packageVersion
+            );
+            wp_enqueue_style($handle);
+          }
+        }
+      }
+    }
+  }
 }
