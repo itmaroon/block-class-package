@@ -12,23 +12,26 @@ namespace Itmar\BlockClassPakage;
 class ItmarEntryClass
 
 ## 変更履歴
-= 1.1.0 =
+= 1.1.1 =  
+enqueueCommonStylesメソッドに渡すファイルパスをプラグインのルートフォルダより上位のフォルダ内のファイルパスを渡すことができるように修正
+
+= 1.1.0 =  
 enqueueCommonStylesメソッドを追加
 
 = 1.0.4 =
 - 登録するブロックが単数の場合でも対応できるよう機能を追加
 - 依存するプラグインがインストールされていない又は有効化されていない場合のエラーメッセージを修正
 
-= 1.0.3 =
+= 1.0.3 =  
 wp_set_script_translationsのハンドルを"ブロック名-editor-script"とすることでblock.jsonにデフォルトで設定されている"editorScript": "file:./index.js",を維持しながら、wp_set_script_translationsの機能を維持するようにした。
 
-= 1.0.2 =
+= 1.0.2 =  
 WordPress6.5対応のためwp_register_scriptではなくwp_enqueue_scriptでハンドルを使用するようにしました。
 
-= 1.0.1 =
+= 1.0.1 =  
 引数名のスペルミスを修正しました。
 
-= 1.0.0 =
+= 1.0.0 =  
 最初のリリース
 
 ## メソッドの機能と引数

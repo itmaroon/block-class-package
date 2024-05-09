@@ -108,7 +108,7 @@ class ItmarEntryClass
   //共通スタイルの読み込み
   function enqueueCommonStyles($filePath, $isEditor, $packageName)
   {
-    $packageJsonPath = plugin_dir_path($filePath) . 'package.json';
+    $packageJsonPath = $filePath . '\package.json';
 
     if (file_exists($packageJsonPath)) {
       $packageJson = json_decode(file_get_contents($packageJsonPath), true);
@@ -129,12 +129,14 @@ class ItmarEntryClass
         }
 
         foreach ($styleFiles as $file => $handle) {
-          $stylePath = plugin_dir_path($filePath) . 'node_modules/' . $packageName . '/build/' . $file;
+          $stylePath = $filePath . '/node_modules/' . $packageName . '/build/' . $file;
 
           if (file_exists($stylePath)) {
+            $relativeDir = substr($stylePath, strlen(ABSPATH));
+            $styleUrl = home_url($relativeDir);
             wp_register_style(
               $handle,
-              plugins_url('node_modules/' . $packageName . '/build/' . $file, $filePath),
+              $styleUrl,
               [],
               $packageVersion
             );
