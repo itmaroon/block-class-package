@@ -10,8 +10,12 @@ composer require itmar/block-class-package
 ## 収納されているネームスペース・クラス
 namespace Itmar\BlockClassPakage;  
 class ItmarEntryClass
+class ItmarAccessClass
 
 ## 変更履歴
+= 1.2.0 =  
+アクセスカウンターの実装のため、meta情報としてview_counterというキーを登録する関数をもつItmarAccessClassを追加
+
 = 1.1.1 =  
 enqueueCommonStylesメソッドに渡すファイルパスをプラグインのルートフォルダより上位のフォルダ内のファイルパスを渡すことができるように修正
 
@@ -121,6 +125,39 @@ add_action('enqueue_block_assets', function () use ($block_entry) {
 add_action('wp_enqueue_scripts', function () use ($block_entry) {
 	$block_entry->enqueueCommonStyles(__FILE__, false, "itmar-block-packages");
 });
+
+```
+
+### get_post_count(int $id = 0)
+#### 説明
+$idで指定された投稿データに紐づいたview_counterキーの値を返す。  
+#### 引数
+- `$id` int 任意   
+投稿データのID。指定しなければ現在表示している投稿データのIDが選択される
+
+#### 戻り値
+IDの数値
+#### 呼び出し例
+```
+$block_access = new \Itmar\BlockClassPakage\ItmarAccessClass();
+
+$count = get_post_count()
+
+```
+
+### set_post_count()
+#### 説明
+表示されたシングルページがもつ$idに紐づいたview_counterキーの値を更新する（カウントアップ）。  
+#### 引数
+なし
+
+#### 戻り値
+なし
+#### 呼び出し例
+```
+$block_access = new \Itmar\BlockClassPakage\ItmarAccessClass();
+
+add_action('template_redirect', array($block_access, 'set_post_count'));
 
 ```
 
