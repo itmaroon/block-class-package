@@ -5,7 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Itmar\\BlockClassPakage\\": "src/"
+            "Itmar\\BlockClassPakage\\": "src/BlockClassPakage/",
+            "Itmar\\ClassPakage\\": "src/ClassPakage/"
         }
     },
     "authors": [
