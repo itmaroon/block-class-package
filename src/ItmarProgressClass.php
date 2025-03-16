@@ -62,13 +62,13 @@ if (!class_exists('ProgressOverlay')) {
         // **スクリプトとスタイルを追加**
         public function enqueue_scripts()
         {
-            $plugin_url = plugin_dir_url(dirname(__FILE__, 2)); // `src/` の 2つ上のディレクトリを取得
+            $plugin_url = plugin_dir_url(dirname(__FILE__, 1)); // `src/` の 1つ上のディレクトリを取得
             $script_path = 'src/assets/js/itmar-progress-overlay.js';
             wp_enqueue_script(
                 'progress-overlay',
                 $plugin_url . $script_path,
                 ['jquery', 'wp-i18n'],
-                filemtime(plugin_dir_path(dirname(__FILE__, 2)) . $script_path), // バージョン管理のための `filemtime`
+                filemtime(plugin_dir_path(dirname(__FILE__, 1)) . $script_path), // バージョン管理のための `filemtime`
                 true
             );
 
