@@ -1,6 +1,6 @@
 <?php
 
-namespace Itmar\ClassPakage;
+namespace Itmar\BlockClassPakage;
 
 if (!class_exists('ProgressOverlay')) {
     class ProgressOverlay
