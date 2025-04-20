@@ -9,7 +9,7 @@
         }
     },
     "require": {
-        "itmaroon/loader-package": "^1.0"
+        "itmar/loader-package": "^1.0"
     },
     "authors": [
         {

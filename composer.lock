@@ -4,26 +4,26 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1df7bf93e9024a0773ea3b9e7e9c3734",
+    "content-hash": "de289de179a30e558bb69bb4173d0e10",
     "packages": [
         {
-            "name": "itmaroon/loader-package",
+            "name": "itmar/loader-package",
             "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itmaroon/loader-package.git",
-                "reference": "cffea6449579f658a6716c221a10e469352d71d6"
+                "reference": "478ac7391c3bd45a7cead85a2fe99a8017c6c652"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itmaroon/loader-package/zipball/cffea6449579f658a6716c221a10e469352d71d6",
-                "reference": "cffea6449579f658a6716c221a10e469352d71d6",
+                "url": "https://api.github.com/repos/itmaroon/loader-package/zipball/478ac7391c3bd45a7cead85a2fe99a8017c6c652",
+                "reference": "478ac7391c3bd45a7cead85a2fe99a8017c6c652",
                 "shasum": ""
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Itmaroon\\LoaderPackage\\": "src/"
+                    "Itmar\\Autoloader\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -41,7 +41,7 @@
                 "issues": "https://github.com/itmaroon/loader-package/issues",
                 "source": "https://github.com/itmaroon/loader-package/tree/v1.0.0"
             },
-            "time": "2025-04-20T08:33:17+00:00"
+            "time": "2025-04-20T10:08:55+00:00"
         }
     ],
     "packages-dev": [],

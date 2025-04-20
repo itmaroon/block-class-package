@@ -1,26 +1,26 @@
 {
     "packages": [
         {
-            "name": "itmaroon/loader-package",
+            "name": "itmar/loader-package",
             "version": "v1.0.0",
             "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itmaroon/loader-package.git",
-                "reference": "cffea6449579f658a6716c221a10e469352d71d6"
+                "reference": "478ac7391c3bd45a7cead85a2fe99a8017c6c652"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itmaroon/loader-package/zipball/cffea6449579f658a6716c221a10e469352d71d6",
-                "reference": "cffea6449579f658a6716c221a10e469352d71d6",
+                "url": "https://api.github.com/repos/itmaroon/loader-package/zipball/478ac7391c3bd45a7cead85a2fe99a8017c6c652",
+                "reference": "478ac7391c3bd45a7cead85a2fe99a8017c6c652",
                 "shasum": ""
             },
-            "time": "2025-04-20T08:33:17+00:00",
+            "time": "2025-04-20T10:08:55+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Itmaroon\\LoaderPackage\\": "src/"
+                    "Itmar\\Autoloader\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -38,7 +38,7 @@
                 "issues": "https://github.com/itmaroon/loader-package/issues",
                 "source": "https://github.com/itmaroon/loader-package/tree/v1.0.0"
             },
-            "install-path": "../itmaroon/loader-package"
+            "install-path": "../itmar/loader-package"
         }
     ],
     "dev": true,
