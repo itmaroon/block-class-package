@@ -8,7 +8,9 @@ class ItmarEntryClass
   {
     //jsで使えるようにhome_urlをローカライズ
     $js_name = str_replace("-", "_", $text_domain);
-    wp_enqueue_script('itmar-script-handle', plugins_url('', $file_path) . '/assets/block_handle.js', null, null, false);
+    $file_path = plugin_dir_path(__FILE__) . 'assets/block_handle.js';
+    $version = file_exists($file_path) ? filemtime($file_path) : false;
+    wp_enqueue_script('itmar-script-handle', plugins_url('', $file_path) . '/assets/block_handle.js', null, $version, false);
     wp_localize_script('itmar-script-handle', $js_name, array(
       'home_url' => home_url(),
       'plugin_url' => plugins_url('', $file_path)
@@ -63,14 +65,14 @@ class ItmarEntryClass
           // プラグインはインストールされているが有効化されていない
           $plugin_file = $plugin . '/' . $plugin . '.php';
           $activate_url = wp_nonce_url(admin_url('plugins.php?action=activate&plugin=' . $plugin_file), 'activate-plugin_' . $plugin_file);
-          $link = __("Activate Plugin", $plugin_data['TextDomain']);
-          $message = $plugin_data['Name'] . ': ' . __("Required plugin is not active.", $plugin_data['TextDomain']) . "(" . $plugin . ")";
+          $link = __("Activate Plugin", "block-class-package");
+          $message = $plugin_data['Name'] . ': ' . __("Required plugin is not active.", "block-class-package") . "(" . $plugin . ")";
           $ret_obj = array("message" => $message, "link" => $link, "url" => $activate_url);
         } else {
           // プラグインがインストールされていない
           $install_url = admin_url('plugin-install.php?s=' . $plugin . '&tab=search&type=term');
-          $link = __("Install Plugin", $plugin_data['TextDomain']);
-          $message = $plugin_data['Name'] . ': ' . __("Required plugin is not installed.", $plugin_data['TextDomain']) . "(" . $plugin . ")";
+          $link = __("Install Plugin", "block-class-package");
+          $message = $plugin_data['Name'] . ': ' . __("Required plugin is not installed.", "block-class-package") . "(" . $plugin . ")";
           $ret_obj = array("message" => $message, "link" => $link, "url" => $install_url);
         }
         return $ret_obj;
@@ -88,10 +90,12 @@ class ItmarEntryClass
       // エラーメッセージ
       $message = $notice["message"] . $notice["link"];
       // プラグインへの戻るリンク
-      $return_link = '<br><br><a href="' . esc_url(admin_url('plugins.php')) . '">' . __("Return to Plugins Setting", $plugin_data['TextDomain']) . '</a>';
+      $return_link = '<br><br><a href="' . esc_url(admin_url('plugins.php')) . '">' . __("Return to Plugins Setting", "block-class-package") . '</a>';
 
       // wp_die関数でカスタムメッセージとリンクを表示
-      wp_die($message . $return_link);
+      wp_die(
+        wp_kses_post($message . $return_link)
+      );
     }
   }
 

@@ -29,7 +29,7 @@ if (!class_exists('ItmarProgressClass')) {
             <div id="importOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 10000; text-align: center;">
                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border-radius: 10px;">
                     <h3><?php echo esc_html__("Processing...", "post-migration"); ?></h3>
-                    <img id="progressLoadingImg" src="<?php echo plugin_dir_url(__FILE__) . 'assets/img/transloading.gif'; ?>" style="margin: 0 auto" alt="Loading...">
+                    <img id="progressLoadingImg" src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'assets/img/transloading.gif'); ?>" style="margin: 0 auto" alt="Loading...">
                     <div style="width: 300px; background: #ccc; border-radius: 5px; overflow: hidden; display: none;" id="progressBarWrapper">
                         <div id="progressBar" style="width: 0%; height: 20px; background: #28a745;"></div>
                     </div>
@@ -84,7 +84,7 @@ if (!class_exists('ItmarProgressClass')) {
         {
             check_ajax_referer('itmar-ajax-nonce', 'nonce'); // ✅ `nonce` を検証
 
-            $flg = isset($_POST['flg']) ? sanitize_text_field($_POST['flg']) : 'false';
+            $flg = isset($_POST['flg']) ? sanitize_text_field(wp_unslash($_POST['flg'])) : 'false';
             $is_cancel = ($flg === 'true'); // ✅ `"true"` の場合 `true` に変換
 
             $updated = update_option('start_cancel', $is_cancel);
