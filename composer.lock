@@ -1,0 +1,56 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "1df7bf93e9024a0773ea3b9e7e9c3734",
+    "packages": [
+        {
+            "name": "itmaroon/loader-package",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itmaroon/loader-package.git",
+                "reference": "cffea6449579f658a6716c221a10e469352d71d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itmaroon/loader-package/zipball/cffea6449579f658a6716c221a10e469352d71d6",
+                "reference": "cffea6449579f658a6716c221a10e469352d71d6",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Itmaroon\\LoaderPackage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "itmaroon",
+                    "email": "master@itmaroon.net"
+                }
+            ],
+            "description": "This package provides the ability to load classes via Composer's PSR-4 configuration without relying on the autoloader. This is useful when you want to avoid class conflicts between loaders in multiple plugins.",
+            "support": {
+                "issues": "https://github.com/itmaroon/loader-package/issues",
+                "source": "https://github.com/itmaroon/loader-package/tree/v1.0.0"
+            },
+            "time": "2025-04-20T08:33:17+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
+}

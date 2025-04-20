@@ -8,9 +8,8 @@
             "Itmar\\BlockClassPakage\\": "src/"
         }
     },
-    "config": {
-        "optimize-autoloader": false,
-        "classmap-authoritative": false
+    "require": {
+        "itmaroon/loader-package": "^1.0"
     },
     "authors": [
         {
