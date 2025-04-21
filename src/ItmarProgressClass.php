@@ -28,7 +28,7 @@ if (!class_exists('ItmarProgressClass')) {
 ?>
             <div id="importOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 10000; text-align: center;">
                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border-radius: 10px;">
-                    <h3><?php echo esc_html__("Processing...", "post-migration"); ?></h3>
+                    <h3><?php echo esc_html__("Processing...", "block-class-package"); ?></h3>
                     <img id="progressLoadingImg" src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'assets/img/transloading.gif'); ?>" style="margin: 0 auto" alt="Loading...">
                     <div style="width: 300px; background: #ccc; border-radius: 5px; overflow: hidden; display: none;" id="progressBarWrapper">
                         <div id="progressBar" style="width: 0%; height: 20px; background: #28a745;"></div>
@@ -43,7 +43,7 @@ if (!class_exists('ItmarProgressClass')) {
                         border-radius: 5px;
                         transition: opacity 0.3s ease;
                     ">
-                        <?php echo esc_html__("Cancel", "post-migration"); ?>
+                        <?php echo esc_html__("Cancel", "block-class-package"); ?>
                     </button>
                 </div>
             </div>
@@ -90,7 +90,7 @@ if (!class_exists('ItmarProgressClass')) {
             $updated = update_option('start_cancel', $is_cancel);
 
             wp_send_json_success([
-                'message' => $is_cancel ? __('proceed canceled', 'post-migration') : __('proceed started', 'post-migration'),
+                'message' => $is_cancel ? __('proceed canceled', 'block-class-package') : __('proceed started', 'block-class-package'),
                 'updated' => $updated, // ✅ `true` または `false` をレスポンスに含める
                 'new_value' => $is_cancel // ✅ 現在の `start_cancel` の値
             ]);

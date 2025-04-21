@@ -8,8 +8,8 @@ class ItmarEntryClass
   {
     //jsで使えるようにhome_urlをローカライズ
     $js_name = str_replace("-", "_", $text_domain);
-    $file_path = plugin_dir_path(__FILE__) . 'assets/block_handle.js';
-    $version = file_exists($file_path) ? filemtime($file_path) : false;
+    $handle_path = plugin_dir_path($file_path) . 'assets/block_handle.js';
+    $version = file_exists($handle_path) ? filemtime($handle_path) : false;
     wp_enqueue_script('itmar-script-handle', plugins_url('', $file_path) . '/assets/block_handle.js', null, $version, false);
     wp_localize_script('itmar-script-handle', $js_name, array(
       'home_url' => home_url(),
