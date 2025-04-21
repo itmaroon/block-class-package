@@ -6,10 +6,13 @@ class Loader
 {
     protected static $prefixes = [];
 
-    public static function register()
+    public static function register($psr4_path = null)
     {
         if (!self::$prefixes) {
-            self::$prefixes = require __DIR__ . '/../../vendor/composer/autoload_psr4.php';
+            if (!$psr4_path) {
+                throw new \InvalidArgumentException('Path to autoload_psr4.php is required.');
+            }
+            self::$prefixes = require $psr4_path;
         }
 
         spl_autoload_register([__CLASS__, 'autoload']);
