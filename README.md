@@ -8,7 +8,7 @@ Gutenbergのブロック登録に関連して、必要なPHPの関数をcomposer
 composer require itmar/block-class-package
 ```
 ## 収納されているネームスペース・クラス
-namespace Itmar\BlockClassPakage;  
+namespace Itmar\BlockClassPackage;  
 namespace Itmar\ClassPakage;  
 class ItmarEntryClass  
 class ItmarAccessClass  
@@ -45,7 +45,7 @@ WordPress6.5対応のためwp_register_scriptではなくwp_enqueue_scriptでハ
 
 ## メソッドの機能と引数
 ### 名前空間・クラス
-\Itmar\BlockClassPakage\ItmarEntryClass  
+\Itmar\BlockClassPackage\ItmarEntryClass  
 
 #### block_init(string $text_domain, string $file_path)
 ##### 説明
@@ -64,7 +64,7 @@ plugin_url・・・プラグインルートのURL
 なし
 ##### 呼び出し例
 ```
-$block_entry = new \Itmar\BlockClassPakage\ItmarEntryClass();
+$block_entry = new \Itmar\BlockClassPackage\ItmarEntryClass();
 
 add_action('init', function () use ($block_entry) {
 	$block_entry->block_init('text-domain', __FILE__);
@@ -83,7 +83,7 @@ get_plugin_dataで取得したプラグインの情報
 なし
 ##### 呼び出し例
 ```
-$block_entry = new \Itmar\BlockClassPakage\ItmarEntryClass();
+$block_entry = new \Itmar\BlockClassPackage\ItmarEntryClass();
 
 register_activation_hook(__FILE__, function () use ($block_entry) {
 	$plugin_data = get_plugin_data(__FILE__);
@@ -103,7 +103,7 @@ get_plugin_dataで取得したプラグインの情報
 なし
 ##### 呼び出し例
 ```
-$block_entry = new \Itmar\BlockClassPakage\ItmarEntryClass();
+$block_entry = new \Itmar\BlockClassPackage\ItmarEntryClass();
 
 add_action('admin_notices', function () use ($block_entry) {
 	$plugin_data = get_plugin_data(__FILE__);
@@ -126,7 +126,7 @@ index.css、style-index.cssが格納されているnpmパッケージの名前
 なし
 ##### 呼び出し例
 ```
-$block_entry = new \Itmar\BlockClassPakage\ItmarEntryClass();
+$block_entry = new \Itmar\BlockClassPackage\ItmarEntryClass();
 
 add_action('enqueue_block_assets', function () use ($block_entry) {
 	$block_entry->enqueueCommonStyles(__FILE__, true, "itmar-block-packages");
@@ -137,7 +137,7 @@ add_action('wp_enqueue_scripts', function () use ($block_entry) {
 
 ```
 ### 名前空間・クラス
-\Itmar\BlockClassPakage\ItmarAccessClass
+\Itmar\BlockClassPackage\ItmarAccessClass
 #### get_post_count(int $id = 0)
 ##### 説明
 $idで指定された投稿データに紐づいたview_counterキーの値を返す。  
@@ -149,7 +149,7 @@ $idで指定された投稿データに紐づいたview_counterキーの値を�
 IDの数値
 ###### 呼び出し例
 ```
-$block_access = new \Itmar\BlockClassPakage\ItmarAccessClass();
+$block_access = new \Itmar\BlockClassPackage\ItmarAccessClass();
 
 $count = get_post_count()
 
@@ -165,7 +165,7 @@ $count = get_post_count()
 なし
 ##### 呼び出し例
 ```
-$block_access = new \Itmar\BlockClassPakage\ItmarAccessClass();
+$block_access = new \Itmar\BlockClassPackage\ItmarAccessClass();
 
 add_action('template_redirect', array($block_access, 'set_post_count'));
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Itmar\BlockClassPakage;
+namespace Itmar\BlockClassPackage;
 
 class ItmarEntryClass
 {
