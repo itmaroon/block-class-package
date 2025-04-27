@@ -72,6 +72,14 @@ if (!class_exists('ItmarProgressClass')) {
                 true
             );
 
+            //itmar-progress-overlay.js内の翻訳ファイルに対応
+            $lang_path = plugin_dir_path(dirname(__FILE__, 1)) . 'languages';
+            wp_set_script_translations(
+                'progress-overlay',
+                'block-class-package',
+                $lang_path
+            );
+
             // ✅ `wp_localize_script()` で `nonce` を JavaScript に渡す
             wp_localize_script('progress-overlay', 'ajax_object', [
                 'ajaxurl' => admin_url('admin-ajax.php'),

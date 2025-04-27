@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-21T14:58:09+02:00\n"
-"PO-Revision-Date: 2025-04-21 22:05+0900\n"
+"POT-Creation-Date: 2025-04-26T13:41:38+02:00\n"
+"PO-Revision-Date: 2025-04-26 20:43+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -33,7 +33,7 @@ msgstr "必要なプラグインがインストールされていません。"
 msgid "Return to Plugins Setting"
 msgstr "プラグイン設定に戻る"
 
-#: src/ItmarProgressClass.php:31
+#: src/ItmarProgressClass.php:31 src/assets/js/itmar-progress-overlay.js:43
 msgid "Processing..."
 msgstr "処理中..."
 
@@ -48,3 +48,11 @@ msgstr "処理がキャンセルされました。"
 #: src/ItmarProgressClass.php:93
 msgid "proceed started"
 msgstr "処理を開始"
+
+#: src/assets/js/itmar-progress-overlay.js:37
+msgid "All"
+msgstr "全"
+
+#: src/assets/js/itmar-progress-overlay.js:40
+msgid "Items"
+msgstr "件"

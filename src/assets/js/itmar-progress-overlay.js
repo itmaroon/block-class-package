@@ -36,11 +36,11 @@ window.ProgressOverlay = (function () {
     changeProgress: function (total, current, allcount = 0, count = 0) {
       document.getElementById("progressText").textContent = `${wp.i18n.__(
         "All",
-        "post-migration"
+        "block-class-package"
       )} ${total} ${wp.i18n.__(
         "Items",
-        "post-migration"
-      )}  ${current} ${wp.i18n.__("Processing...", "post-migration")}`;
+        "block-class-package"
+      )}  ${current} ${wp.i18n.__("Processing...", "block-class-package")}`;
 
       if (allcount === 0 || count === 0) {
         document.getElementById("progressBar").style.width =
@@ -70,7 +70,7 @@ window.ProgressOverlay = (function () {
       })
         .then((response) => response.json())
         .then((data) => {
-          alert(wp.i18n.__(data.data.message, "post-migration"));
+          alert(data.data.message);
           this.hide();
         })
         .catch((error) => console.error("Error:", error));
