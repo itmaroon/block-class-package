@@ -15,6 +15,9 @@ class ItmarAccessClass
 class ProgressOverlay  
 
 ## 変更履歴
+= 1.4.0 =  
+オートロードの仕組みをWordPressのプラグインの様に複数のオートロードが実行されても問題ないように変更。パッケージ内に翻訳ファイルを持ち、独自のテキストドメインで翻訳できるように仕様を変更
+  
 = 1.3.0 =  
 汎用的に利用できるプログレスバーの表示と進行管理を行う機能を提供するProgressOverlayクラスを追加。これに伴いネームスペースもItmar\ClassPakageを追加した。
 
