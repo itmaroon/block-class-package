@@ -6,15 +6,23 @@ class ItmarEntryClass
 {
   function block_init($text_domain, $file_path)
   {
-    //jsで使えるようにhome_urlをローカライズ
+    //jsで使えるようにplugin_urlをローカライズ
     $js_name = str_replace("-", "_", $text_domain);
     $handle_path = plugin_dir_path($file_path) . 'assets/block_handle.js';
     $version = file_exists($handle_path) ? filemtime($handle_path) : false;
     wp_enqueue_script('itmar-script-handle', plugins_url('', $file_path) . '/assets/block_handle.js', null, $version, false);
     wp_localize_script('itmar-script-handle', $js_name, array(
-      'home_url' => home_url(),
       'plugin_url' => plugins_url('', $file_path)
     ));
+
+    // Ajax/Nonce 等を渡す共通データ
+    $itmar_option = array(
+      'home_url' => home_url(),
+      'nonce'       => wp_create_nonce('wp_rest'),
+      'adminPostUrl' => esc_url(admin_url('admin-post.php')),
+      'ajaxUrl'     => esc_url(admin_url('admin-ajax.php')),
+      'isLoggedIn'  => is_user_logged_in(),
+    );
 
     //ブロックの登録
     $blocks_dir = plugin_dir_path($file_path) . 'build/blocks';
@@ -27,7 +35,22 @@ class ItmarEntryClass
         if ($block_type instanceof \WP_Block_Type) {
           $block_handle = str_replace("/", "-", $block_type->name);
           // register_block_typeで生成されるハンドルを使用してスクリプトの翻訳をセット
-          wp_set_script_translations($block_handle . '-editor-script', $text_domain, plugin_dir_path($file_path) . 'languages');
+          wp_set_script_translations(
+            $block_handle . '-editor-script',
+            $text_domain,
+            plugin_dir_path($file_path) . 'languages'
+          );
+          // このブロックが使う script handle 全部に localize を当てる
+          $handles = array_merge(
+            $block_type->editor_script_handles ?? array(),
+            $block_type->script_handles ?? array(),
+            $block_type->view_script_handles ?? array()
+          );
+          $handles = array_unique(array_filter($handles));
+
+          foreach ($handles as $h) {
+            wp_localize_script($h, 'itmar_option', $itmar_option);
+          }
         }
       }
     } else {
@@ -40,11 +63,24 @@ class ItmarEntryClass
       if ($block_type instanceof \WP_Block_Type) {
         $block_handle = str_replace("/", "-", $block_type->name);
         // register_block_typeで生成されるハンドルを使用してスクリプトの翻訳をセット
-        wp_set_script_translations($block_handle . '-editor-script', $text_domain, plugin_dir_path($file_path) . 'languages');
+        wp_set_script_translations(
+          $block_handle . '-editor-script',
+          $text_domain,
+          plugin_dir_path($file_path) . 'languages'
+        );
+        // 単体ブロックの handle も同様に
+        $handles = array_merge(
+          $block_type->editor_script_handles ?? array(),
+          $block_type->script_handles ?? array(),
+          $block_type->view_script_handles ?? array()
+        );
+        $handles = array_unique(array_filter($handles));
+
+        foreach ($handles as $h) {
+          wp_localize_script($h, 'itmar_option', $itmar_option);
+        }
       }
     }
-
-
 
     //PHP用のテキストドメインの読込（国際化）
     load_plugin_textdomain($text_domain, false, basename(dirname($file_path)) . '/languages');
