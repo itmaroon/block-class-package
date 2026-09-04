@@ -15,6 +15,9 @@ class ItmarAccessClass
 class ProgressOverlay  
 
 ## 変更履歴
+= 1.4.5 =
+ItmarProgressClassのキャンセル操作を行うAjax処理に管理者権限の確認を追加
+
 = 1.4.4 =
 クライアントサイドで翻訳関数が有効になっていなかったのを修正
 

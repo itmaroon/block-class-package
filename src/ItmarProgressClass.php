@@ -92,6 +92,12 @@ if (!class_exists('ItmarProgressClass')) {
         {
             check_ajax_referer('itmar-ajax-nonce', 'nonce'); // ✅ `nonce` を検証
 
+            if (!current_user_can('manage_options')) {
+                wp_send_json_error([
+                    'message' => __('You do not have sufficient permissions to control this process.', 'block-class-package'),
+                ], 403);
+            }
+
             $flg = isset($_POST['flg']) ? sanitize_text_field(wp_unslash($_POST['flg'])) : 'false';
             $is_cancel = ($flg === 'true'); // ✅ `"true"` の場合 `true` に変換
 
